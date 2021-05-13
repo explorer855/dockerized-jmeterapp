@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+
+  messagebusapi-jmeter-dev: 
+    image: messagebusapi/jmeter:${TAG:-5.4}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - JMETER_VERSION=5.4
+        - IMAGE_TIMEZONE=America/New_York
+    restart: always
