@@ -5,6 +5,10 @@
 NAME="jmeter"
 JMETER_VERSION=${JMETER_VERSION:-"5.4"}
 IMAGE="messagebusapi/jmeter:${JMETER_VERSION}"
+ROOTPATH=$1
 
+echo "$ROOTPATH"
 # Finally run
-docker run --rm --name ${NAME} -i -v ${PWD}:${PWD} -w ${PWD} ${IMAGE} $@
+docker stop $NAME &gt; /dev/null 2&gt;&amp;1
+docker rm $NAME &gt; /dev/null 2&gt;&amp;1
+docker run --name $NAME -i -v $ROOTPATH:/test -w /test $IMAGE ${@:2}
